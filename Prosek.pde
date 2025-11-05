@@ -13,7 +13,7 @@ void draw() {
 void drawFlower() {
   //define center
   int x = (int) (Math.random() * 1500);
-  int y =(int) (randomGaussian() * 125) + (1000 / 3);
+  int y =(int) (randomGaussian() * 115) + (1000 / 3);
   pushMatrix();
   translate(x, y);
   int numPetals = (int) (Math.random() * 4) + 4;
