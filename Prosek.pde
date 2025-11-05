@@ -1,13 +1,15 @@
 void setup() {
   size(1500, 1000);
   background(55, 55, 75);
-  noLoop();
 }
 
 void draw() {
-  for (int i = 0; i < 15; i++) {
-    drawFlower();
-  }
+  frameRate(4);
+  drawFlower();
+}
+
+void mouseClicked() { //stops drawing flowers when mouse is clicked
+  noLoop();
 }
 
 void drawFlower() {
@@ -18,7 +20,7 @@ void drawFlower() {
   //move coordinates
   pushMatrix();
   translate(x, y);
-  
+
   //establish random petal perameters
   int numPetals = (int) (Math.random() * 4) + 4;
   for (int i = 0; i < numPetals; i++) {
@@ -30,19 +32,19 @@ void drawFlower() {
       noFill();
     } else {
       int alpha = (int)(randomGaussian() * 50) + 125;
-      fill(x, y, 0, alpha);
+      fill(.75 * x, .75 * y, 0, alpha);
     }
     stroke(200); // color of petal outiine
-    
+
     //place petals
     rotate(((2 * PI) /5) * (1 + randomGaussian() * 0.2));
     //actually draw petal
-    ellipse(dx, dy, r, r*2); 
+    ellipse(dx, dy, r, r*2);
   }
-  
+
   // reset cooordinates
   popMatrix();
-  
+
   //draw stem and center
   line(x, y, x, 1000);
   fill(0);
