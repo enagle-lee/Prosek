@@ -33,8 +33,7 @@ void drawFlower() {
 
     //place circle
     rotate(((2 * PI) /5) * (1 + randomGaussian() * 0.2));
-    //actually draw circle
-    //circle(dx, dy, r);
+    //actually draw petal
     ellipse(dx, dy, r, r*2); 
   }
   popMatrix();
