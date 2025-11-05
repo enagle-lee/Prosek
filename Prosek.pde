@@ -5,27 +5,34 @@ void setup() {
 }
 
 void draw() {
-  for (int i = 0; i < 15; i++) {
+  for (int i = 0; i < 3; i++) {
     drawFlower();
   }
 }
 
 void drawFlower() {
+  //define center
   int x = (int) (Math.random() * 1200);
-  int y = (-1) * (int) (Math.random() * 250) + 250;
-  for (int i = 0; i < 4; i++) {
-    int xDisplacement = (int) (Math.random() * 50);
-    int yDisplacement = (int) (Math.random() * 50);
-    int r = (int) (Math.random() * 100) + 15;
-    int fill = (int) (Math.random() * 3);
-    if (fill == 0 || fill == 1) {
+  int y = 500 / 3;
+  pushMatrix();
+  translate(x, y);
+  for (int i = 0; i < 8; i++) {
+    int dx = (int) (Math.random() * 50);
+    int dy = (int) (Math.random() * 50);
+    int r = (int) (Math.random() * 50) + 15;
+    int fill = (int) (Math.random() * 2);
+    if (fill == 0) {
       noFill();
     } else {
-      fill(i * (x + xDisplacement), i * (y + yDisplacement), (int)(Math.random() * 100));
+      fill(i * (x + dx), i * (y + dy), (int)(Math.random() * 100));
     }
     stroke(5);
 
-    //arc(x + xDisplacement, y + yDisplacement, r, r, 0, 2 * PI);
-    circle(x + xDisplacement, y + yDisplacement, r);
+    //place circle
+    rotate((2 * PI) / 4);
+    //actually draw circle
+    circle(dx, dy, r);
   }
+  popMatrix();
+  line(x, y, x, 500);
 }
