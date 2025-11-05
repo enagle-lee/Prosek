@@ -1,30 +1,32 @@
 void setup() {
-  size(1200, 500);
+  size(1500, 1000);
   background(250);
   noLoop();
 }
 
 void draw() {
-  for (int i = 0; i < 3; i++) {
+  for (int i = 0; i < 50; i++) {
     drawFlower();
   }
 }
 
 void drawFlower() {
   //define center
-  int x = (int) (Math.random() * 1200);
-  int y = 500 / 3;
+  int x = (int) (Math.random() * 1500);
+  int sd = 125;
+  int mean = (1000 / 3);
+  int y =(int) (randomGaussian() * sd) + mean;
   pushMatrix();
   translate(x, y);
   for (int i = 0; i < 8; i++) {
-    int dx = (int) (Math.random() * 50);
-    int dy = (int) (Math.random() * 50);
-    int r = (int) (Math.random() * 50) + 15;
+    int dx = (int) (Math.random() * 35);
+    int dy = (int) (Math.random() * 35);
+    int r = (int) (Math.random() * 35) + 15;
     int fill = (int) (Math.random() * 2);
     if (fill == 0) {
       noFill();
     } else {
-      fill(i * (x + dx), i * (y + dy), (int)(Math.random() * 100));
+      fill(i * x, i * y, 0);
     }
     stroke(5);
 
@@ -34,5 +36,5 @@ void drawFlower() {
     circle(dx, dy, r);
   }
   popMatrix();
-  line(x, y, x, 500);
+  line(x, y, x, 1000);
 }
