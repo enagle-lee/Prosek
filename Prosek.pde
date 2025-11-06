@@ -1,10 +1,12 @@
+String loc = "";
+
 void setup() {
   size(1500, 1000);
   background(55, 55, 75);
 }
 
 void draw() {
-  frameRate(4);
+  frameRate(200);
   drawFlower();
 }
 
@@ -12,11 +14,21 @@ void mouseClicked() { //stops drawing flowers when mouse is clicked
   noLoop();
 }
 
-void drawFlower() {
+String drawFlower() {
   //define center
   int x = (int) (Math.random() * 1500);
   int y =(int) (randomGaussian() * 115) + (1000 / 3);
-  
+
+  //check if flower can be placed, trying to avoid clustering
+  for (int i = -100; i < 100; i++) {
+    for (int j = -100; j < 100; j++) {
+      if (loc.contains(" " + (x + i) + ", " + (y + j) + ";")) {
+        return "";
+      }
+    }
+  }
+  loc += (x + ", " + y + "; ");  //store new coordinates
+
   //move coordinates
   pushMatrix();
   translate(x, y);
@@ -35,18 +47,19 @@ void drawFlower() {
       fill(.75 * x, .75 * y, 0, alpha);
     }
     stroke(200); // color of petal outiine
-
+  
     //place petals
     rotate(((2 * PI) /5) * (1 + randomGaussian() * 0.2));
     //actually draw petal
     ellipse(dx, dy, r, r*2);
   }
-
+  
   // reset cooordinates
   popMatrix();
-
+  
   //draw stem and center
   line(x, y, x, 1000);
   fill(0);
   circle(x, y, 25);
+  return loc;
 }
